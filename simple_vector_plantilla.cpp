@@ -5,10 +5,30 @@
   }
 
   BidirIterator:: BidirIterator(const BidirIterator& it){
-    ptr = beg;
+    ptr = it;
   }
 
-  double BidirIterator:: operator()
+  double & BidirIterator:: operator*(){
+    return *ptr;
+  }
+
+  BidirIterator & BidirIterator:: operator++() {
+    ++ptr;
+    return *ptr;
+  }
+
+  BidirIterator BidirIterator:: operator++(int) {
+    BidirIterator it = *ptr
+    ++ptr;
+    return it;
+  }
+
+  BidirIterator & BidirIterator:: operator--(){
+
+  } 
+
+
+
 /*
  * CLASS BidirIterator METHODS ---------------------------------------------
  */
