@@ -78,3 +78,5 @@ template <typename T>
     }
 
 #endif
+// g++ main_Bst.cpp Bst .h´ -o main
+//./main
