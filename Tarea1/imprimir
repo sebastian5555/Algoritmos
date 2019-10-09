@@ -1,0 +1,3 @@
+g++ -c ARCHIVO.cpp
+g++ -Wall -Wextra -Werror ARCHIVO_MAIN.cpp ARCHIVO.o -o NOMBRE_EJECUTABLE
+g++ /.MBRE_EJECTUBle
