@@ -16,7 +16,7 @@ private:
 
     };
     BSTNode *root;
-    void insertNode(BSTNode* &t, T k);
+    void insertNode(BSTNode *p,BSTNode* &t, T k);
     void destroyRecursive(BSTNode *t);
     void displayNode (BSTNode *t, int count);
     BSTNode* findNode(BSTNode *t, T k);
@@ -36,28 +36,28 @@ public:
 };
 
 template <typename T>
-    void BST<T>::insertNode(BSTNode* &t, T k){
+    void BST<T>::insertNode(BSTNode *p,BSTNode* &t, T k){
         if(t == nullptr){
             t = new BSTNode;
             t->key = k;
             t->left = t->right = nullptr;
+            t->parent = p;
         }
         else{
             if(k != t->key){
                 if(k < t->key){
-                    t->parent = t->key;
-                    insertNode(t->left, k);
+                    insertNode(t,t->left, k);
                 }
                 else{
-                    t->parent = t->key;
-                    insertNode(t->right, k);
+
+                    insertNode(t,t->right, k);
                 }
             }
         }
     }
 template <typename T>
     void BST<T>:: insertNode(T k){
-        insertNode(root, k);
+        insertNode(nullptr,root, k);
     }
 
 template <typename T>
@@ -75,16 +75,28 @@ template <typename T>
         }
 
 template <typename T>
+    void BST<T>:: formato (BSTNode *t){
+    if (t != nullptr){
+        if (t->left != nullptr) cout <<endl<< "Hijo izquierdo: " << t->left->key<< endl;
+        if (t->right != nullptr) cout <<endl<< "Hijo derecho: " << t->right->key<< endl;
+        if (t->parent != nullptr) cout <<endl<< "Padre: " << t->parent->key << endl;
+
+    }
+}
+
+template <typename T>
     void BST<T>:: displayNode (BSTNode *t, int count){
         if (t != nullptr){
             count ++;
             displayNode (t->left, count);
             cout << "(" << count-1 << ")" << t->key << "";
             displayNode(t->right, count);
+            /*if (t->left != nullptr) cout <<endl<< "Hijo izquierdo: " << t->left->key<< endl;
+            if (t->right != nullptr) cout <<endl<< "Hijo derecho: " << t->right->key<< endl;
+            if (t->parent != nullptr) cout <<endl<< "Padre: " << t->parent->key << endl;
+*/
         }
-        cout << "Hijo izquierdo: " << t->left<< endl;
-        cout << "Hijo derecho: " << t->right<< endl;
-        cout << "Padre: " << t->parent<< endl;
+
     }
 
 template <typename T>
@@ -131,6 +143,30 @@ typename BST<T>:: BSTNode* BST<T>:: maximum(BSTNode *t){
 template<typename T>
 typename BST<T>:: BSTNode* BST<T>:: maximum(){
     return maximum(root);
+}
+
+template<typename T>
+typename BST<T>:: BSTNode* BST<T>:: predecesor(BSTNode *t){
+    if(t->left != nullptr){
+        return maximum(t->left);
+    }
+    else{
+        while(t = t->parent->left){
+            t = t->parent;
+        }
+        t = t->parent;
+        return t;
+    }
+}
+
+
+template<typename T>
+typename BST<T>:: BSTNode* BST<T>:: sucesor(BSTNode *t){
+    if(t->right != nullptr){
+        return minimum(t->right);
+    }
+    else{
+
 }
 
 
